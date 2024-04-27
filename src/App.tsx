@@ -1,7 +1,36 @@
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
+import { LandingPage, HomePage } from "./modules";
+import { Navbar } from "./components";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <NavbarWrapper />,
+    children: [
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "/home",
+        element: <HomePage />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  return <div className="flex text-5xl font-bold">Gladi </div>;
+  return <RouterProvider router={router} />;
+}
+
+function NavbarWrapper() {
+  return (
+    <div className="min-h-screen flex flex-col gap-2 w-full items-center">
+      <Navbar />
+      <Outlet />
+    </div>
+  );
 }
 
 export default App;
