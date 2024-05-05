@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 export function RegisterPage() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
