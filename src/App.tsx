@@ -1,6 +1,6 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import { LandingPage, HomePage } from "./modules";
+import { LandingPage, HomePage, LoginPage, RegisterPage } from "./modules";
 import { Navbar } from "./components";
 
 const router = createBrowserRouter([
@@ -15,6 +15,14 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <HomePage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
       },
     ],
   },
