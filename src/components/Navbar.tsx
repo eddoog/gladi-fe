@@ -1,34 +1,33 @@
 import { RootState, useAppSelector } from "../redux/store";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { logout } from "../redux/slice";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useGetUserInfoQuery } from "../redux/api/authAPi";
 
 export function Navbar() {
-  const user_token = useAppSelector((state: RootState) => state.user).token
-  const {data: user} = useGetUserInfoQuery()
+  const user_token = useAppSelector((state: RootState) => state.user).token;
+  const { data: user } = useGetUserInfoQuery();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
 
   const handleRegister = () => {
-    navigate('/register')
-  }
-  
+    navigate("/register");
+  };
+
   const handleLogin = () => {
-    navigate('/login')
-  } 
+    navigate("/login");
+  };
 
-
-  if (!user_token){
+  if (!user_token) {
     return (
       <div>
         <div className="flex gap-4">
-        <div className="text-xl font-bold">Welcome to Gladi!</div>
+          <div className="text-xl font-bold">Welcome to Gladi!</div>
           <button onClick={handleRegister} className="hover:text-gray-300">
             Register
           </button>
@@ -38,12 +37,13 @@ export function Navbar() {
         </div>
       </div>
     );
-  }
-  else{
+  } else {
     return (
       <div>
         <div className="flex gap-4">
-        <div className="text-xl font-bold">Welcome Back, {user?.username}!</div>
+          <div className="text-xl font-bold">
+            Welcome Back, {user?.username}!
+          </div>
           <button onClick={handleLogout} className="hover:text-gray-300">
             Logout
           </button>
