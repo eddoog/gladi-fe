@@ -1,25 +1,25 @@
-'use client'
-import type { Middleware, MiddlewareAPI } from '@reduxjs/toolkit'
-import { isRejectedWithValue } from '@reduxjs/toolkit'
-import { logout } from './slice'
+"use client";
+import type { Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
+import { isRejectedWithValue } from "@reduxjs/toolkit";
+import { logout } from "./slice";
 
 export const rtkQueryErrorLogger: Middleware =
-  (api: MiddlewareAPI) => (next) => (action: any) => {
+  (api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action)) {
-      if (action.meta.arg.endpointName == 'getProfile') {
-        return
+      if (action.meta.arg.endpointName == "getProfile") {
+        return;
       } else if (
         action?.payload.status == 401 &&
-        action.meta.arg.endpointName != 'login'
+        action.meta.arg.endpointName != "login"
       ) {
-        api.dispatch(logout())
+        api.dispatch(logout());
       } else {
         const errorData =
           action.payload.data?.error?.message ||
           action.payload.data?.message ||
-          action.error.message
-        console.log(errorData)
+          action.error.message;
+        console.log(errorData);
       }
     }
-    return next(action)
-  }
+    return next(action);
+  };
