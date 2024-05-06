@@ -13,5 +13,12 @@ export const baseApi = createApi({
       return headers
     },
   }),
-  endpoints: (builder) => ({}),
+  endpoints: (builder) => ({
+    uselessApi: builder.query<void, void>({
+      query: () => ({
+        url: '/info',
+        method: 'GET',
+      }),
+    }),
+  }),
 })
