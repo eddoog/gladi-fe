@@ -1,25 +1,41 @@
 import React, { useState } from 'react';
+import { useRegisterMutation } from '../redux/api/authAPi';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export function RegisterPage() {
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-  
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const [register] = useRegisterMutation();
+
+    const navigate = useNavigate();
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log('Username:', username);
-      console.log('Email:', email);
-      console.log('Password:', password);
+      const data = {
+        username: username,
+        password: password
+      }
+      await register({ ...data }).then((res) => {
+        if (res) {
+          if ('data' in res) {
+            toast.success("Register success!")
+            navigate('/')
+          } else if ('data' in res.error) {
+            const errorData = res.error.data as { message: string }
+            toast.error(errorData.message)
+          } else {
+            toast.error('Unknown error!')
+          }
+        }
+      })
     };
   
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
     };
-    
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setEmail(event.target.value);
-    };
-  
+      
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setPassword(event.target.value);
     };
@@ -45,21 +61,6 @@ export function RegisterPage() {
             />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email:
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="mt-1 p-2 border rounded-md w-full"
-                placeholder="Enter your email"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
-            </div>
-            <div className="mb-4">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password:
               </label>
@@ -78,7 +79,7 @@ export function RegisterPage() {
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
             >
-              Login
+              Register
             </button>
           </form>
         </div>
