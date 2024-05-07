@@ -5,7 +5,7 @@ import { logout } from "./slice";
 import toast from "react-hot-toast";
 
 export const rtkQueryErrorLogger: Middleware =
-  (api: MiddlewareAPI) => (next) => (action) => {
+  (api: MiddlewareAPI) => (next) => (action: any) => {
     if (isRejectedWithValue(action)) {
       if (action.meta.arg.endpointName == "getProfile") {
         return;
