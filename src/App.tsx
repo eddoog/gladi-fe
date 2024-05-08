@@ -9,6 +9,7 @@ import {
   CapturePage,
 } from "./modules";
 import { Navbar } from "./components";
+import ToggleTheme from "./components/common/ToggleTheme";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ function NavbarWrapper() {
     <div className="min-h-screen flex flex-col gap-2 w-full items-center">
       <Navbar />
       <Outlet />
+      <ToggleTheme />
     </div>
   );
 }
