@@ -2,7 +2,7 @@ import { Sun, Moon } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 export default function ToggleTheme() {
-  const [currentTheme, setTheme] = useState(getInitialTheme());
+  const [currentTheme, setCurrentTheme] = useState(getInitialTheme());
 
   const applyTheme = useCallback(() => {
     if (currentTheme === "dark") {
@@ -26,11 +26,11 @@ export default function ToggleTheme() {
       systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
 
-    return userTheme || (systemTheme ? "dark" : "light");
+    return userTheme ?? (systemTheme ? "dark" : "light");
   }
 
   function toggleTheme() {
-    setTheme(currentTheme === "dark" ? "light" : "dark");
+    setCurrentTheme(currentTheme === "dark" ? "light" : "dark");
   }
 
   return (
