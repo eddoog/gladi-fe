@@ -27,22 +27,22 @@ export function RecordingListPage() {
           </button>
         </div>
 
-        <div className="flex flex-wrap gap-3 w-full py-5">
+        <div className="flex flex-wrap gap-3 w-full py-5 px-4">
           <div className="w-full">
-            <a href="/" className="block">
-              <div className="w-full bg-gray-200 p-4 rounded-lg shadow-md mb-4">
+            <a href="/" className="block dark:text-indigo-300">
+              <div className="w-full bg-gray-200 dark:bg-gray-600 border-2 border-gray-400 dark:border-gray-500 p-4 rounded-lg shadow-md mb-4">
                 <p>Video 1</p>
                 <p>Time: ...</p>
               </div>
             </a>
-            <a href="/" className="block">
-              <div className="w-full bg-gray-200 p-4 rounded-lg shadow-md mb-4">
+            <a href="/" className="block dark:text-indigo-300">
+              <div className="w-full bg-gray-200 dark:bg-gray-600 border-2 border-gray-400 dark:border-gray-500 p-4 rounded-lg shadow-md mb-4">
                 <p>Video 2</p>
                 <p>Time: ...</p>
               </div>
             </a>
-            <a href="/" className="block">
-              <div className="w-full bg-gray-200 p-4 rounded-lg shadow-md mb-4">
+            <a href="/" className="block dark:text-indigo-300">
+              <div className="w-full bg-gray-200 dark:bg-gray-600 border-2 border-gray-400 dark:border-gray-500 p-4 rounded-lg shadow-md mb-4">
                 <p>Video 3</p>
                 <p>Time: ...</p>
               </div>

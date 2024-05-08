@@ -1,6 +1,13 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import { LandingPage, HomePage, LoginPage, RegisterPage, RecordingListPage, CapturePage } from "./modules";
+import {
+  LandingPage,
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  RecordingListPage,
+  CapturePage,
+} from "./modules";
 import { Navbar } from "./components";
 
 const router = createBrowserRouter([
