@@ -50,7 +50,7 @@ function App() {
 
 function NavbarWrapper() {
   return (
-    <div className="min-h-screen flex flex-col gap-2 w-full items-center">
+    <div className="min-h-screen flex flex-col gap-2 w-full items-center relative">
       <Navbar />
       <Outlet />
       <ToggleTheme />
