@@ -4,3 +4,4 @@ export * from "./LoginPage";
 export * from "./RegisterPage";
 export * from "./RecordingListPage";
 export * from "./CapturePage";
+export * from "./TesPage";

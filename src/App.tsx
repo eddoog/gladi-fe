@@ -1,6 +1,6 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import { LandingPage, HomePage, LoginPage, RegisterPage, RecordingListPage, CapturePage } from "./modules";
+import { LandingPage, HomePage, LoginPage, RegisterPage, RecordingListPage, CapturePage, TesPage } from "./modules";
 import { Navbar } from "./components";
 
 const router = createBrowserRouter([
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/capture",
         element: <CapturePage />,
+      },
+      {
+        path: "/tes",
+        element: <TesPage />,
       },
     ],
   },
