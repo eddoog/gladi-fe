@@ -1,7 +1,15 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import { LandingPage, HomePage, LoginPage, RegisterPage, RecordingListPage, CapturePage, TesPage } from "./modules";
+import {
+  LandingPage,
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  RecordingListPage,
+  CapturePage,
+} from "./modules";
 import { Navbar } from "./components";
+import ToggleTheme from "./components/common/ToggleTheme";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +40,6 @@ const router = createBrowserRouter([
         path: "/capture",
         element: <CapturePage />,
       },
-      {
-        path: "/tes",
-        element: <TesPage />,
-      },
     ],
   },
 ]);
@@ -46,9 +50,10 @@ function App() {
 
 function NavbarWrapper() {
   return (
-    <div className="min-h-screen flex flex-col gap-2 w-full items-center">
+    <div className="min-h-screen flex flex-col gap-2 w-full items-center relative">
       <Navbar />
       <Outlet />
+      <ToggleTheme />
     </div>
   );
 }

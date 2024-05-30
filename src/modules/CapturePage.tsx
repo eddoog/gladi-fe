@@ -4,8 +4,11 @@ import { CameraButton } from '../components/common/CameraButton';
 import { Select } from '../components/common/Select';
 import { Selector } from '../components/common/Selector';
 import { Button } from '../components/common/Button';
+import { useNavigate } from "react-router-dom";
 
 export function CapturePage() {
+  const navigate = useNavigate();
+
   const {
     activeRecordings,
     cancelRecording,
@@ -27,10 +30,10 @@ export function CapturePage() {
   const handleSelect = async (event: any) => {
     const { deviceid: deviceId } =
       event.target.options[event.target.selectedIndex].dataset;
-    if (devicesById?.[deviceId].type === 'videoinput') {
+    if (devicesById?.[deviceId].type === "videoinput") {
       setVideoDeviceId(deviceId);
     }
-    if (devicesById?.[deviceId].type === 'audioinput') {
+    if (devicesById?.[deviceId].type === "audioinput") {
       setAudioDeviceId(deviceId);
     }
   };
@@ -70,8 +73,18 @@ export function CapturePage() {
     console.log("Upload");
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className='container mt-5'>
+        <button
+          onClick={handleBack}
+          className="rounded-lg flex flex-row items-center gap-2 justify-center bg-blue-500 text-white hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600 duration-200 transition-all ease-in-out px-4 py-2"
+        >
+          Back
+        </button>
         <div className="float-start p-4" style={{maxWidth: "1000px", width: "70%"}}>
             <div className="space-y-2">
                 <div className="flex">
