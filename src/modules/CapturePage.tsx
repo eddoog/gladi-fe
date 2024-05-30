@@ -1,10 +1,11 @@
 import React from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
+import { useNavigate } from "react-router-dom";
+import SwitchSelector from "react-switch-selector";
+
 import { CameraButton } from '../components/common/CameraButton';
 import { Select } from '../components/common/Select';
-import { Selector } from '../components/common/Selector';
 import { Button } from '../components/common/Button';
-import { useNavigate } from "react-router-dom";
 
 export function CapturePage() {
   const navigate = useNavigate();
@@ -26,6 +27,22 @@ export function CapturePage() {
   const [audioDeviceId, setAudioDeviceId] = React.useState<string>('');
   const [recordedChunks, setRecordedChunks] = React.useState<Blob | undefined>(undefined);
   const [selectedFile, setSelectedFile] = React.useState(null);
+
+  const options = [
+    {
+      label: "EN",
+      value: "english",
+      selectedBackgroundColor: "#0097e6",
+      innerHeight: 50
+    },
+    {
+      label: "ID",
+      value: "indonesia",
+      selectedBackgroundColor: "#0097e6"
+    }
+  ];
+
+  const initialSelectedIndex = options.findIndex(({ value }) => value === "bar");
 
   const handleSelect = async (event: any) => {
     const { deviceid: deviceId } =
@@ -62,12 +79,15 @@ export function CapturePage() {
         console.log("Error")
     }
     
-
     console.log(formData);
     // const response = await fetch('https://your-backend-url.com/upload', {
     //     method: 'POST',
     //     body: formData,
     // });
+  };
+
+  const onChange = (newValue: any) => {
+    console.log(newValue);
   };
 
   const handleFileUpload = (event: any) => {
@@ -158,7 +178,13 @@ export function CapturePage() {
             <input type="file" onChange={handleFileUpload} />
             <div className='m-4'></div>
             <p>Pilih Bahasa</p>
-            <Selector></Selector>
+            <div style={{height: "50px"}}>
+              <SwitchSelector
+                onChange={onChange}
+                options={options}
+                initialSelectedIndex={initialSelectedIndex}
+              />
+            </div>
             <div className='m-4'></div>
             <Button loading={false} onClick={send}>
                 <span>Submit</span>
