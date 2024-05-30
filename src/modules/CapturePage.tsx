@@ -24,7 +24,7 @@ export function CapturePage() {
 
   const [videoDeviceId, setVideoDeviceId] = React.useState<string>('');
   const [audioDeviceId, setAudioDeviceId] = React.useState<string>('');
-  const [recordedChunks, setRecordedChunks] = React.useState(null);
+  const [recordedChunks, setRecordedChunks] = React.useState<Blob | undefined>(undefined);
   const [selectedFile, setSelectedFile] = React.useState(null);
 
   const handleSelect = async (event: any) => {
@@ -45,7 +45,10 @@ export function CapturePage() {
 
   const stop  = async (id: string) => {
     const recorded = await stopRecording(id);
-    if (recorded) setRecordedChunks(recorded.blob);
+    if (recorded) {
+      setRecordedChunks(recorded.blob);
+      // console.log(recorded.blob);
+    }
   };
 
   const send = async () => {
@@ -60,7 +63,7 @@ export function CapturePage() {
     }
     
 
-    console.log("Send");
+    console.log(formData);
     // const response = await fetch('https://your-backend-url.com/upload', {
     //     method: 'POST',
     //     body: formData,
