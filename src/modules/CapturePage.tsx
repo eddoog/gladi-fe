@@ -71,19 +71,30 @@ export function CapturePage() {
 
   const send = async () => {
     // Upload the blob to a back-end
-    const formData = new FormData();
+    const formVideo = new FormData();
+    const formFile = new FormData();
 
     if (recordedChunks != null && selectedFile != null) {
-        formData.append('video', recordedChunks, uuid());
-        formData.append('file', selectedFile, 'context');
+        formVideo.append('file', recordedChunks);
+        formVideo.append("name", uuid());
+
+        formFile.append('file', selectedFile);
+        formFile.append("name", uuid());
     } else {
         console.log("Error")
     }
     
-    console.log(formData);
-    // const response = await fetch('https://your-backend-url.com/upload', {
+    console.log(formVideo);
+    console.log(formFile);
+
+    // const response = await fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/api/video', {
     //     method: 'POST',
-    //     body: formData,
+    //     body: formVideo,
+    // });
+
+    // const response = await fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload', {
+    //     method: 'POST',
+    //     body: formFile,
     // });
   };
 
