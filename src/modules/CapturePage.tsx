@@ -87,14 +87,22 @@ export function CapturePage() {
     console.log(formVideo);
     console.log(formFile);
 
-    // const response = await fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/api/video', {
-    //     method: 'POST',
-    //     body: formVideo,
+    // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/api/video', {
+    //   method: 'POST',
+    //   body: formVideo,
+    // }).then(async response => {
+    //   console.log(response);
+    // }).catch(error => {
+    //   console.log(error);
     // });
 
-    // const response = await fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload', {
-    //     method: 'POST',
-    //     body: formFile,
+    // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload', {
+    //   method: 'POST',
+    //   body: formFile,
+    // }).then(async response => {
+    //   console.log(response);
+    // }).catch(error => {
+    //   console.log(error);
     // });
   };
 
