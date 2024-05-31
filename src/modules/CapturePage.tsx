@@ -1,8 +1,11 @@
+import 'react-notifications-component/dist/theme.css'
+
 import React from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
 import { useNavigate } from "react-router-dom";
 import SwitchSelector from "react-switch-selector";
 import { v4 as uuid } from 'uuid';
+import { ReactNotifications, Store } from 'react-notifications-component'
 
 import { CameraButton } from '../components/common/CameraButton';
 import { Select } from '../components/common/Select';
@@ -92,8 +95,8 @@ export function CapturePage() {
     //   body: formVideo,
     // }).then(async response => {
     //   console.log(response);
-    // }).catch(error => {
-    //   console.log(error);
+    // }).catch(_ => {
+    //   notification("Upload Failed!", "danger");
     // });
 
     // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload', {
@@ -101,9 +104,11 @@ export function CapturePage() {
     //   body: formFile,
     // }).then(async response => {
     //   console.log(response);
-    // }).catch(error => {
-    //   console.log(error);
+    // }).catch(_ => {
+    //   notification("Upload Failed!", "danger");
     // });
+
+    notification("Upload Success!", "success");
   };
 
   const onChange = (newValue: any) => {
@@ -120,8 +125,22 @@ export function CapturePage() {
     navigate(-1);
   };
 
+  const notification = (title: string, type: any) => {
+    Store.addNotification({
+      title: title,
+      type: type,
+      insert: "top",
+      container: "top-center",
+      dismiss: {
+        duration: 3000,
+        onScreen: true
+      }
+    });
+  };
+
   return (
     <div className='container mt-5'>
+        <ReactNotifications />
         <button
           onClick={handleBack}
           className="rounded-lg flex flex-row items-center gap-2 justify-center bg-blue-500 text-white hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600 duration-200 transition-all ease-in-out px-4 py-2"
