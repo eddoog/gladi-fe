@@ -2,6 +2,7 @@ import React from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
 import { useNavigate } from "react-router-dom";
 import SwitchSelector from "react-switch-selector";
+import { v4 as uuid } from 'uuid';
 
 import { CameraButton } from '../components/common/CameraButton';
 import { Select } from '../components/common/Select';
@@ -73,7 +74,7 @@ export function CapturePage() {
     const formData = new FormData();
 
     if (recordedChunks != null && selectedFile != null) {
-        formData.append('video', recordedChunks, 'recorded.webm');
+        formData.append('video', recordedChunks, uuid());
         formData.append('file', selectedFile, 'context');
     } else {
         console.log("Error")
