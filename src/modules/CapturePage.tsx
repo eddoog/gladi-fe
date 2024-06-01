@@ -78,11 +78,12 @@ export function CapturePage() {
     const formFile = new FormData();
 
     if (recordedChunks != null && selectedFile != null) {
+        const id = uuid()
         formVideo.append('file', recordedChunks);
-        formVideo.append("name", uuid());
+        formVideo.append("name", id);
 
         formFile.append('file', selectedFile);
-        formFile.append("name", uuid());
+        formFile.append("name", id);
     } else {
         console.log("Error")
     }
