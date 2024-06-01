@@ -10,6 +10,7 @@ import { ReactNotifications, Store } from 'react-notifications-component'
 import { CameraButton } from '../components/common/CameraButton';
 import { Select } from '../components/common/Select';
 import { Button } from '../components/common/Button';
+import { useGetUserInfoQuery } from "../redux/api/authAPi";
 
 export function CapturePage() {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ export function CapturePage() {
     startRecording,
     stopRecording,
   } = useRecordWebcam();
+
+  const { data: user } = useGetUserInfoQuery();
 
   const [videoDeviceId, setVideoDeviceId] = React.useState<string>('');
   const [audioDeviceId, setAudioDeviceId] = React.useState<string>('');
@@ -74,36 +77,24 @@ export function CapturePage() {
 
   const send = async () => {
     // Upload the blob to a back-end
-    const formVideo = new FormData();
-    const formFile = new FormData();
+    const formData = new FormData();
 
-    if (recordedChunks != null && selectedFile != null) {
-        formVideo.append('file', recordedChunks);
-        formVideo.append("name", uuid());
-
-        formFile.append('file', selectedFile);
-        formFile.append("name", uuid());
+    if (recordedChunks != null && selectedFile != null && user) {
+      formData.append('video', recordedChunks);
+      formData.append('file', selectedFile);
+      formData.append("name", uuid());
+      formData.append("user_id", user.id);
     } else {
         console.log("Error")
     }
     
-    console.log(formVideo);
-    console.log(formFile);
+    console.log(formData);
 
-    // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/api/video', {
+    // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload-file', {
     //   method: 'POST',
-    //   body: formVideo,
-    // }).then(async response => {
-    //   console.log(response);
-    // }).catch(_ => {
-    //   notification("Upload Failed!", "danger");
-    // });
-
-    // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload', {
-    //   method: 'POST',
-    //   body: formFile,
-    // }).then(async response => {
-    //   console.log(response);
+    //   body: formData,
+    // }).then(async _ => {
+    //   notification("Upload Success!", "success");;
     // }).catch(_ => {
     //   notification("Upload Failed!", "danger");
     // });
