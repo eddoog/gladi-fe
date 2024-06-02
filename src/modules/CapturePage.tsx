@@ -67,6 +67,12 @@ export function CapturePage() {
     if (recording) await openCamera(recording.id);
   };
 
+  const record  = async (id: string) => {
+    await startRecording(id);
+    await new Promise((resolve) => setTimeout(resolve, 900000));
+    stop(id);
+  };
+
   const stop  = async (id: string) => {
     const recorded = await stopRecording(id);
     if (recorded) {
@@ -172,7 +178,7 @@ export function CapturePage() {
                             recording.status === 'RECORDING' ||
                             recording.status === 'PAUSED'
                             }
-                            onClick={() => startRecording(recording.id)}
+                            onClick={() => record(recording.id)}
                         >
                             Rekam
                         </CameraButton>

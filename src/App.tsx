@@ -7,6 +7,7 @@ import {
   RegisterPage,
   RecordingListPage,
   CapturePage,
+  TesPage
 } from "./modules";
 import { Navbar } from "./components";
 import ToggleTheme from "./components/common/ToggleTheme";
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/capture",
         element: <CapturePage />,
+      },
+      {
+        path: "/tes",
+        element: <TesPage />,
       },
     ],
   },
