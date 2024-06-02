@@ -72,7 +72,7 @@ export function CapturePage() {
 
   const record  = async (id: string) => {
     await startRecording(id);
-    await new Promise((resolve) => setTimeout(resolve, 900000));
+    await new Promise((resolve) => setTimeout(resolve, 900000));  // Set for 15 minutes
     stop(id);
   };
 
@@ -88,28 +88,26 @@ export function CapturePage() {
     // Upload the blob to a back-end
     const formData = new FormData();
 
-    if (recordedChunks != null && selectedFile != null && user) {
+    if (recordedChunks != undefined && selectedFile != null && user) {
       formData.append('video', recordedChunks);
       formData.append('file', selectedFile);
       formData.append("name", uuid());
       formData.append("user_id", user.id);
       formData.append("lang", languange);
+
+      // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload-file', {
+      //   method: 'POST',
+      //   body: formData,
+      // }).then(async _ => {
+      //   notification("Upload Success!", "success");;
+      // }).catch(_ => {
+      //   notification("Upload Failed!", "danger");
+      // });
     } else {
       notification("Incomplete Data!", "danger");
     }
     
     console.log(formData);
-
-    // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload-file', {
-    //   method: 'POST',
-    //   body: formData,
-    // }).then(async _ => {
-    //   notification("Upload Success!", "success");;
-    // }).catch(_ => {
-    //   notification("Upload Failed!", "danger");
-    // });
-
-    notification("Upload Success!", "success");
   };
 
   const onChange = (newValue: any) => {
@@ -124,7 +122,7 @@ export function CapturePage() {
   };
 
   const handleBack = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   const notification = (title: string, type: any) => {
