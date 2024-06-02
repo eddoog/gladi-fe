@@ -26,25 +26,28 @@ export function CapturePage() {
     openCamera,
     startRecording,
     stopRecording,
-  } = useRecordWebcam();
+  } = useRecordWebcam({
+    mediaTrackConstraints: { width: 640, height: 360, aspectRatio: 0.5 }
+  });
 
   const { data: user } = useGetUserInfoQuery();
 
   const [videoDeviceId, setVideoDeviceId] = React.useState<string>('');
   const [audioDeviceId, setAudioDeviceId] = React.useState<string>('');
+  const [languange, setlanguange] = React.useState<string>('en');
   const [recordedChunks, setRecordedChunks] = React.useState<Blob | undefined>(undefined);
   const [selectedFile, setSelectedFile] = React.useState(null);
 
   const options = [
     {
       label: "EN",
-      value: "english",
+      value: "en",
       selectedBackgroundColor: "#0097e6",
       innerHeight: 50
     },
     {
       label: "ID",
-      value: "indonesia",
+      value: "id",
       selectedBackgroundColor: "#0097e6"
     }
   ];
@@ -90,8 +93,9 @@ export function CapturePage() {
       formData.append('file', selectedFile);
       formData.append("name", uuid());
       formData.append("user_id", user.id);
+      formData.append("lang", languange);
     } else {
-        console.log("Error")
+      notification("Incomplete Data!", "danger");
     }
     
     console.log(formData);
@@ -109,13 +113,14 @@ export function CapturePage() {
   };
 
   const onChange = (newValue: any) => {
-    console.log(newValue);
+    setlanguange(newValue);
+    // console.log(newValue);
   };
 
   const handleFileUpload = (event: any) => {
     setSelectedFile(event.target.files[0]);
 
-    console.log("Upload");
+    // console.log("Upload");
   };
 
   const handleBack = () => {
