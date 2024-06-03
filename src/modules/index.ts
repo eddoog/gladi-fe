@@ -5,3 +5,4 @@ export * from "./RegisterPage";
 export * from "./RecordingListPage";
 export * from "./CapturePage";
 export * from "./TesPage";
+export * from "./ResultPage";

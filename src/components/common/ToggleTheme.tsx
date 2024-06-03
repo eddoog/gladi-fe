@@ -34,11 +34,11 @@ export default function ToggleTheme() {
   }
 
   return (
-    <div className="absolute bottom-3 right-3">
+    <div>
       {currentTheme === "dark" ? (
-        <Sun width="30px" height="30px" onClick={toggleTheme} />
+        <Sun width="24px" height="24px" onClick={toggleTheme} />
       ) : (
-        <Moon width="30px" height="30px" onClick={toggleTheme} />
+        <Moon width="24px" height="24px" onClick={toggleTheme} />
       )}
     </div>
   );

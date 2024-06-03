@@ -7,10 +7,10 @@ import {
   RegisterPage,
   RecordingListPage,
   CapturePage,
-  TesPage
+  TesPage,
+  ResultPage
 } from "./modules";
 import { Navbar } from "./components";
-import ToggleTheme from "./components/common/ToggleTheme";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +42,10 @@ const router = createBrowserRouter([
         element: <CapturePage />,
       },
       {
+        path: "/result/:id",
+        element: <ResultPage />,
+      },
+      {
         path: "/tes",
         element: <TesPage />,
       },
@@ -58,7 +62,6 @@ function NavbarWrapper() {
     <div className="min-h-screen flex flex-col gap-2 w-full items-center relative">
       <Navbar />
       <Outlet />
-      <ToggleTheme />
     </div>
   );
 }
