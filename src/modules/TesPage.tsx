@@ -95,7 +95,7 @@ export function TesPage() {
               <small>Video: {recording.videoLabel}</small>
               <small>Audio: {recording.audioLabel}</small>
             </div>
-            <video ref={recording.webcamRef} loop autoPlay playsInline />
+            <video ref={recording.webcamRef} loop autoPlay playsInline muted />
             <div className="space-x-1 space-y-1 my-2">
               <CameraButton
                 inverted

@@ -175,7 +175,7 @@ export function CapturePage() {
             <div className="grid grid-cols-custom gap-4 my-4">
                 {activeRecordings.map((recording) => (
                 <div className="bg-white rounded-lg px-4 py-4" key={recording.id}>
-                    <video ref={recording.webcamRef} loop autoPlay playsInline />
+                    <video ref={recording.webcamRef} loop autoPlay playsInline muted />
                     <div className="space-x-1 space-y-1 my-2">
                         <CameraButton
                             inverted
