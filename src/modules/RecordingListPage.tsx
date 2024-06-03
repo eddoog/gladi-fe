@@ -13,7 +13,7 @@ export function RecordingListPage() {
     navigate("/");
   };
 
-  if (user?.id || recordingData?.length == 0){
+  if (user?.id == undefined || recordingData?.length == 0){
       return (
         <div>
           <div className="flex flex-wrap gap-3 w-full py-10">
