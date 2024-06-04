@@ -1,15 +1,15 @@
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useGetTaskResultQuery } from "../redux/api/processingApi";
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useGetTaskResultQuery } from '../redux/api/processingApi';
 
 export function ProgressPage() {
   const { task_id } = useParams();
   const { user_id } = useParams();
   const { file_name } = useParams();
-  const success = "SUCCESS";
+  const success = 'SUCCESS';
 
   const { data, refetch } = useGetTaskResultQuery(
-    task_id ? task_id : "undefined",
+    task_id ? task_id : 'undefined'
   );
 
   useEffect(() => {
@@ -25,13 +25,13 @@ export function ProgressPage() {
   if (data?.task_result == null) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="w-2/3 border border-black p-10">
+        <div className="w-2/3 border border-black p-10 rounded-xl">
           <h1 className="mb-4 text-center text-2xl font-semibold">
             Your Analysis Result for:
           </h1>
           <h2 className="mb-4 text-center text-2xl font-semibold">
-            {" "}
-            {data?.task_id}{" "}
+            {' '}
+            {data?.task_id}{' '}
           </h2>
           <p className={`bold text-center text-2xl text-yellow-500`}>
             On Progress
@@ -45,13 +45,13 @@ export function ProgressPage() {
   } else if (data.task_result.error == undefined) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="w-2/3 border border-black p-10">
+        <div className="w-2/3 border border-black p-10 rounded-xl">
           <h1 className="mb-4 text-center text-2xl font-semibold">
             Your Analysis Result for:
           </h1>
           <h2 className="mb-4 text-center text-2xl font-semibold">
-            {" "}
-            {data?.task_id}{" "}
+            {' '}
+            {data?.task_id}{' '}
           </h2>
           <p className={`bold text-center text-2xl text-green-500`}>Success</p>
           <a
@@ -66,13 +66,13 @@ export function ProgressPage() {
   } else {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="w-2/3 border border-black p-10">
+        <div className="w-2/3 border border-black p-10 rounded-xl">
           <h1 className="mb-4 text-center text-2xl font-semibold">
             Your Analysis Result for:
           </h1>
           <h2 className="mb-4 text-center text-2xl font-semibold">
-            {" "}
-            {data?.task_id}{" "}
+            {' '}
+            {data?.task_id}{' '}
           </h2>
           <p className={`text-center italic text-red-500`}>Error</p>
           <p>There is an error while processing your recording</p>

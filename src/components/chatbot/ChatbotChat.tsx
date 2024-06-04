@@ -1,15 +1,15 @@
-import clsx from "clsx";
-import { SendHorizonal } from "lucide-react";
-import React, { useEffect, useRef } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import Markdown from "react-markdown";
-import { useAskChatbotFeedbackMutation } from "../../redux/api/chatbotApi";
-import { ChatbotHistory } from "../../redux/types/chatbot";
+import clsx from 'clsx';
+import { SendHorizonal } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import Markdown from 'react-markdown';
+import { useAskChatbotFeedbackMutation } from '../../redux/api/chatbotApi';
+import { ChatbotHistory } from '../../redux/types/chatbot';
 
 type ChatbotChatProps = {
   feedback_id: string;
   chat_history: ChatbotHistory[] | undefined;
-  refetch: () => any;
+  refetch: () => unknown;
 };
 
 type Inputs = {
@@ -19,7 +19,7 @@ type Inputs = {
 export function ChatbotChat({
   feedback_id,
   chat_history,
-  refetch,
+  refetch
 }: Readonly<ChatbotChatProps>) {
   const [askChatbotFeedback, { isLoading }] = useAskChatbotFeedbackMutation();
   const { register, handleSubmit, reset, getValues } = useForm<Inputs>();
@@ -28,9 +28,9 @@ export function ChatbotChat({
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await askChatbotFeedback({
       body: {
-        question: data.question,
+        question: data.question
       },
-      feedbackId: feedback_id,
+      feedbackId: feedback_id
     }).unwrap();
     reset();
     refetch();
@@ -46,21 +46,21 @@ export function ChatbotChat({
   return (
     <div className="flex h-full flex-col rounded-md bg-slate-200 p-2">
       <div
-        className="mb-2 max-h-[320px] flex-1 overflow-auto rounded-md bg-white p-2"
+        className="mb-2 max-h-[320px] min-h-[320px] flex-1 overflow-auto rounded-md bg-white p-2"
         ref={chatContainer}
       >
         {chat_history?.map((chat, index) => (
           <React.Fragment key={index}>
-            {chat.message.data.type === "human" && (
+            {chat.message.data.type === 'human' && (
               <UserMessage message={chat.message.data.content} />
             )}
-            {chat.message.data.type === "ai" && (
+            {chat.message.data.type === 'ai' && (
               <ChatbotMessage message={chat.message.data.content} />
             )}
           </React.Fragment>
         ))}
-        {isLoading && <UserMessage message={getValues("question")} />}
-        {isLoading && <ChatbotMessage message={"..."} isLoading={true} />}
+        {isLoading && <UserMessage message={getValues('question')} />}
+        {isLoading && <ChatbotMessage message={'...'} isLoading={true} />}
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-2">
@@ -70,12 +70,12 @@ export function ChatbotChat({
             placeholder="Enter Message to Chatbot"
             className="flex-1 rounded-xl border-slate-200 bg-white p-2"
             required
-            {...register("question")}
+            {...register('question')}
           />
           <button
             type="submit"
             aria-label="Submit Question"
-            className={`rounded-xl bg-blue-500 p-2 ${clsx({ "hover:brightness-75": !isLoading, "bg-slate-400": isLoading })}`}
+            className={`rounded-xl bg-blue-500 p-2 ${clsx({ 'hover:brightness-75': !isLoading, 'bg-slate-400': isLoading })}`}
             disabled={isLoading}
           >
             <SendHorizonal aria-hidden={true} className="text-white" />
@@ -88,16 +88,16 @@ export function ChatbotChat({
 
 function ChatbotMessage({
   message,
-  isLoading = false,
+  isLoading = false
 }: Readonly<{ message: string; isLoading?: boolean }>) {
   return (
     <div
       className={`mb-2 mr-6 w-fit rounded-xl bg-slate-200 p-2 ${clsx({
-        "animate-pulse": isLoading,
+        'animate-pulse': isLoading
       })}`}
     >
       <Markdown>
-        {message || "There is something wrong. Please try again!"}
+        {message || 'There is something wrong. Please try again!'}
       </Markdown>
     </div>
   );
