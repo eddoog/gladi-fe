@@ -4,7 +4,8 @@ import {
   ChatbotResponse,
 } from "../types/chatbot";
 
-const CHATBOT_API = "http://127.0.0.1:8000";
+// const CHATBOT_API = "http://127.0.0.1:8000";
+const CHATBOT_API = "https://feedback-chatbot-service-73zeqjyhhq-et.a.run.app";
 
 export const chatbotApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

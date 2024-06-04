@@ -8,7 +8,8 @@ import {
   RecordingListPage,
   CapturePage,
   TesPage,
-  ResultPage
+  ResultPage,
+  ProgressPage
 } from "./modules";
 import { Navbar } from "./components";
 
@@ -42,8 +43,12 @@ const router = createBrowserRouter([
         element: <CapturePage />,
       },
       {
-        path: "/result/:id",
+        path: "/result/:id/:user_id/:file_name",
         element: <ResultPage />,
+      },
+      {
+        path: "/progress/:task_id/:user_id/:file_name",
+        element: <ProgressPage />,
       },
       {
         path: "/tes",

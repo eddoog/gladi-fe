@@ -6,3 +6,4 @@ export * from "./RecordingListPage";
 export * from "./CapturePage";
 export * from "./TesPage";
 export * from "./ResultPage";
+export * from "./ProgressPage";

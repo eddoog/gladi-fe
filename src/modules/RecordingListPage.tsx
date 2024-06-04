@@ -9,6 +9,7 @@ export function RecordingListPage() {
 
   // Supaya klo user id null gak ngaco 
   const {data: recordingData} = useGetUserRecordingQuery(user?.id ? user.id : "bad_request")
+  
   const handleBack = () => {
     navigate("/");
   };
@@ -62,9 +63,10 @@ export function RecordingListPage() {
           <div className="w-full">
             {
               recordingData?.map((recording) => (
-                <a href="/" className="block dark:text-indigo-300" key={recording.id}>
-                  <div className="w-full bg-gray-200 dark:bg-gray-600 border-2 border-gray-400 dark:border-gray-500 p-4 rounded-lg shadow-md mb-4">
-                    <p>{recording.file_name}</p>
+                <a href={`/progress/${recording.task_id}/${recording.user_id}/${recording.file_name}`} className="block dark:text-indigo-300" key={recording.id}>
+                  <div className="w-full flex flex-col  justify-center bg-gray-200 dark:bg-gray-600 border-2 border-gray-400 dark:border-gray-500 p-4 rounded-lg shadow-md mb-4">
+                    <p>File name: {recording.file_name}</p>
+                    <p>Task id: {recording.task_id}</p>
                   </div>
                 </a>
               ))
