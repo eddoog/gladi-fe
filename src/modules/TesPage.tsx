@@ -1,7 +1,7 @@
-import React from "react";
-import { useRecordWebcam } from "react-record-webcam";
-import { CameraButton } from "../components/common/CameraButton";
-import { Select } from "../components/common/Select";
+import React from 'react';
+import { useRecordWebcam } from 'react-record-webcam';
+import { CameraButton } from '../components/common/CameraButton';
+import { Select } from '../components/common/Select';
 
 export function TesPage() {
   const {
@@ -20,20 +20,20 @@ export function TesPage() {
     pauseRecording,
     resumeRecording,
     startRecording,
-    stopRecording,
+    stopRecording
   } = useRecordWebcam();
 
-  const [videoDeviceId, setVideoDeviceId] = React.useState<string>("");
-  const [audioDeviceId, setAudioDeviceId] = React.useState<string>("");
+  const [videoDeviceId, setVideoDeviceId] = React.useState<string>('');
+  const [audioDeviceId, setAudioDeviceId] = React.useState<string>('');
 
   const handleSelect = async (event: any) => {
     const { deviceid: deviceId } =
       event.target.options[event.target.selectedIndex].dataset;
 
-    if (devicesById?.[deviceId].type === "videoinput") {
+    if (devicesById?.[deviceId].type === 'videoinput') {
       setVideoDeviceId(deviceId);
     }
-    if (devicesById?.[deviceId].type === "audioinput") {
+    if (devicesById?.[deviceId].type === 'audioinput') {
       setAudioDeviceId(deviceId);
     }
   };
@@ -86,7 +86,7 @@ export function TesPage() {
         <CameraButton onClick={() => clearError()}>Clear error</CameraButton>
       </div>
       <div className="my-2">
-        <p>{errorMessage ? `Error: ${errorMessage}` : ""}</p>
+        <p>{errorMessage ? `Error: ${errorMessage}` : ''}</p>
       </div>
       <div className="grid-cols-custom my-4 grid gap-4">
         {activeRecordings?.map((recording) => (
@@ -102,8 +102,8 @@ export function TesPage() {
               <CameraButton
                 inverted
                 disabled={
-                  recording.status === "RECORDING" ||
-                  recording.status === "PAUSED"
+                  recording.status === 'RECORDING' ||
+                  recording.status === 'PAUSED'
                 }
                 onClick={() => startRecording(recording.id)}
               >
@@ -112,17 +112,17 @@ export function TesPage() {
               <CameraButton
                 inverted
                 disabled={
-                  recording.status !== "RECORDING" &&
-                  recording.status !== "PAUSED"
+                  recording.status !== 'RECORDING' &&
+                  recording.status !== 'PAUSED'
                 }
-                toggled={recording.status === "PAUSED"}
+                toggled={recording.status === 'PAUSED'}
                 onClick={() =>
-                  recording.status === "PAUSED"
+                  recording.status === 'PAUSED'
                     ? resumeRecording(recording.id)
                     : pauseRecording(recording.id)
                 }
               >
-                {recording.status === "PAUSED" ? "Resume" : "Pause"}
+                {recording.status === 'PAUSED' ? 'Resume' : 'Pause'}
               </CameraButton>
               <CameraButton
                 inverted
@@ -147,9 +147,9 @@ export function TesPage() {
 
             <div
               className={`${
-                recording.previewRef.current?.src.startsWith("blob:")
-                  ? "visible"
-                  : "hidden"
+                recording.previewRef.current?.src.startsWith('blob:')
+                  ? 'visible'
+                  : 'hidden'
               }`}
             >
               <p>Preview</p>

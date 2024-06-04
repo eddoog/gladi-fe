@@ -1,6 +1,6 @@
-"use client";
-import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+'use client';
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import {
   FLUSH,
   PAUSE,
@@ -8,23 +8,23 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
-  persistStore,
-} from "redux-persist";
+  persistStore
+} from 'redux-persist';
 
-import { rootReducer } from "./reducer";
-import { rtkQueryErrorLogger } from "./middleware";
-import { baseApi } from "./api/baseApi";
+import { rootReducer } from './reducer';
+import { rtkQueryErrorLogger } from './middleware';
+import { baseApi } from './api/baseApi';
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      }
     })
       .prepend(rtkQueryErrorLogger)
-      .concat(baseApi.middleware),
+      .concat(baseApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

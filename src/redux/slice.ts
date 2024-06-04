@@ -1,8 +1,8 @@
-import { User } from "./types/user";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
-import { LoginResponse } from "./types/auth";
-import { authApi } from "./api/authAPi";
+import { User } from './types/user';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
+import { LoginResponse } from './types/auth';
+import { authApi } from './api/authAPi';
 
 interface UserSliceState {
   token: string | null;
@@ -11,20 +11,20 @@ interface UserSliceState {
 
 const initialState: UserSliceState = {
   token: null,
-  user: null,
+  user: null
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     logout: (state) => {
-      storage.removeItem("persist:root");
-      window.localStorage.removeItem("token");
+      storage.removeItem('persist:root');
+      window.localStorage.removeItem('token');
       state.user = null;
       state.token = null;
-      window.location.pathname = "/login";
-    },
+      window.location.pathname = '/login';
+    }
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -32,15 +32,15 @@ const userSlice = createSlice({
       (state, { payload }: PayloadAction<LoginResponse>) => {
         const token = payload.token;
         state.token = token;
-      },
+      }
     ),
       builder.addMatcher(
         authApi.endpoints.register.matchFulfilled,
         (state, { payload }: PayloadAction<LoginResponse>) => {
           state.token = payload.token;
-        },
+        }
       );
-  },
+  }
 });
 
 export const { logout } = userSlice.actions;

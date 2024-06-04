@@ -1,5 +1,5 @@
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./App.css";
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './App.css';
 import {
   LandingPage,
   HomePage,
@@ -9,53 +9,53 @@ import {
   CapturePage,
   TesPage,
   ResultPage,
-  ProgressPage,
-} from "./modules";
-import { Navbar } from "./components";
+  ProgressPage
+} from './modules';
+import { Navbar } from './components';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <NavbarWrapper />,
     children: [
       {
-        path: "/",
-        element: <LandingPage />,
+        path: '/',
+        element: <LandingPage />
       },
       {
-        path: "/home",
-        element: <HomePage />,
+        path: '/home',
+        element: <HomePage />
       },
       {
-        path: "/login",
-        element: <LoginPage />,
+        path: '/login',
+        element: <LoginPage />
       },
       {
-        path: "/register",
-        element: <RegisterPage />,
+        path: '/register',
+        element: <RegisterPage />
       },
       {
-        path: "/recordings",
-        element: <RecordingListPage />,
+        path: '/recordings',
+        element: <RecordingListPage />
       },
       {
-        path: "/capture",
-        element: <CapturePage />,
+        path: '/capture',
+        element: <CapturePage />
       },
       {
-        path: "/result/:id/:user_id/:file_name",
-        element: <ResultPage />,
+        path: '/result/:id/:user_id/:file_name',
+        element: <ResultPage />
       },
       {
-        path: "/progress/:task_id/:user_id/:file_name",
-        element: <ProgressPage />,
+        path: '/progress/:task_id/:user_id/:file_name',
+        element: <ProgressPage />
       },
       {
-        path: "/tes",
-        element: <TesPage />,
-      },
-    ],
-  },
+        path: '/tes',
+        element: <TesPage />
+      }
+    ]
+  }
 ]);
 
 function App() {

@@ -1,19 +1,20 @@
-import "react-notifications-component/dist/theme.css";
+import 'react-notifications-component/dist/theme.css';
+import { RootState, useAppSelector } from '../redux/store';
+import React from 'react';
+import { useRecordWebcam } from 'react-record-webcam';
+import { useNavigate } from 'react-router-dom';
+import SwitchSelector from 'react-switch-selector';
+import { v4 as uuid } from 'uuid';
+import { ReactNotifications, Store } from 'react-notifications-component';
 
-import React from "react";
-import { useRecordWebcam } from "react-record-webcam";
-import { useNavigate } from "react-router-dom";
-import SwitchSelector from "react-switch-selector";
-import { v4 as uuid } from "uuid";
-import { ReactNotifications, Store } from "react-notifications-component";
-
-import { CameraButton } from "../components/common/CameraButton";
-import { Select } from "../components/common/Select";
-import { Button } from "../components/common/Button";
-import { useGetUserInfoQuery } from "../redux/api/authAPi";
+import { CameraButton } from '../components/common/CameraButton';
+import { Select } from '../components/common/Select';
+import { Button } from '../components/common/Button';
+import { useGetUserInfoQuery } from '../redux/api/authAPi';
 
 export function CapturePage() {
   const navigate = useNavigate();
+  const user_token = useAppSelector((state: RootState) => state.user).token;
 
   const {
     activeRecordings,
@@ -25,46 +26,46 @@ export function CapturePage() {
     devicesByType,
     openCamera,
     startRecording,
-    stopRecording,
+    stopRecording
   } = useRecordWebcam({
-    mediaTrackConstraints: { width: 640, height: 360, aspectRatio: 0.5 },
+    mediaTrackConstraints: { width: 640, height: 360, aspectRatio: 0.5 }
   });
 
   const { data: user } = useGetUserInfoQuery();
 
-  const [videoDeviceId, setVideoDeviceId] = React.useState<string>("");
-  const [audioDeviceId, setAudioDeviceId] = React.useState<string>("");
-  const [languange, setlanguange] = React.useState<string>("en");
+  const [videoDeviceId, setVideoDeviceId] = React.useState<string>('');
+  const [audioDeviceId, setAudioDeviceId] = React.useState<string>('');
+  const [languange, setlanguange] = React.useState<string>('en');
   const [recordedChunks, setRecordedChunks] = React.useState<Blob | undefined>(
-    undefined,
+    undefined
   );
   const [selectedFile, setSelectedFile] = React.useState(null);
 
   const options = [
     {
-      label: "EN",
-      value: "en",
-      selectedBackgroundColor: "#0097e6",
-      innerHeight: 50,
+      label: 'EN',
+      value: 'en',
+      selectedBackgroundColor: '#0097e6',
+      innerHeight: 50
     },
     {
-      label: "ID",
-      value: "id",
-      selectedBackgroundColor: "#0097e6",
-    },
+      label: 'ID',
+      value: 'id',
+      selectedBackgroundColor: '#0097e6'
+    }
   ];
 
   const initialSelectedIndex = options.findIndex(
-    ({ value }) => value === "bar",
+    ({ value }) => value === 'bar'
   );
 
   const handleSelect = async (event: any) => {
     const { deviceid: deviceId } =
       event.target.options[event.target.selectedIndex].dataset;
-    if (devicesById?.[deviceId].type === "videoinput") {
+    if (devicesById?.[deviceId].type === 'videoinput') {
       setVideoDeviceId(deviceId);
     }
-    if (devicesById?.[deviceId].type === "audioinput") {
+    if (devicesById?.[deviceId].type === 'audioinput') {
       setAudioDeviceId(deviceId);
     }
   };
@@ -92,33 +93,41 @@ export function CapturePage() {
     // Upload the blob to a back-end
     const formData = new FormData();
 
-    if (recordedChunks != undefined && selectedFile != null && user) {
-      formData.append("video", recordedChunks);
-      formData.append("file", selectedFile);
-      formData.append("name", uuid());
-      formData.append("user_id", user.id);
-      formData.append("lang", languange);
+    if (
+      recordedChunks != undefined &&
+      selectedFile != null &&
+      user &&
+      user_token != null
+    ) {
+      formData.append('video', recordedChunks);
+      formData.append('file', selectedFile);
+      formData.append('name', uuid());
+      formData.append('user_id', user.id);
+      formData.append('lang', languange);
 
       fetch(
-        "https://video-recording-service-73zeqjyhhq-et.a.run.app/upload-file",
+        'https://video-recording-service-73zeqjyhhq-et.a.run.app/upload-file',
         {
-          method: "POST",
+          method: 'POST',
           body: formData,
-        },
+          headers: {
+            Authorization: `Bearer ${user_token}`
+          }
+        }
       )
         .then(async (response) => {
           const data = await response.json();
           notification(
-            "Upload Success!",
-            "success",
-            `Your request is being processing with ID: ${data.task_id}`,
+            'Upload Success!',
+            'success',
+            `Your request is being processing with ID: ${data.task_id}`
           );
         })
         .catch((_) => {
-          notification("Upload Failed!", "danger", null);
+          notification('Upload Failed!', 'danger', null);
         });
     } else {
-      notification("Incomplete Data!", "danger", null);
+      notification('Incomplete Data!', 'danger', null);
     }
 
     // console.log(formData);
@@ -136,7 +145,7 @@ export function CapturePage() {
   };
 
   const handleBack = () => {
-    navigate("/");
+    navigate('/');
   };
 
   const notification = (title: string, type: any, message: any) => {
@@ -144,12 +153,12 @@ export function CapturePage() {
       title: title,
       message: message,
       type: type,
-      insert: "top",
-      container: "top-center",
+      insert: 'top',
+      container: 'top-center',
       dismiss: {
         duration: 3000,
-        onScreen: true,
-      },
+        onScreen: true
+      }
     });
   };
 
@@ -164,7 +173,7 @@ export function CapturePage() {
       </button>
       <div
         className="float-start p-4"
-        style={{ maxWidth: "1000px", width: "70%" }}
+        style={{ maxWidth: '1000px', width: '70%' }}
       >
         <div className="space-y-2">
           <div className="flex">
@@ -204,8 +213,8 @@ export function CapturePage() {
                 <CameraButton
                   inverted
                   disabled={
-                    recording.status === "RECORDING" ||
-                    recording.status === "PAUSED"
+                    recording.status === 'RECORDING' ||
+                    recording.status === 'PAUSED'
                   }
                   onClick={() => record(recording.id)}
                 >
@@ -224,9 +233,9 @@ export function CapturePage() {
 
               <div
                 className={`${
-                  recording.previewRef.current?.src.startsWith("blob:")
-                    ? "visible"
-                    : "hidden"
+                  recording.previewRef.current?.src.startsWith('blob:')
+                    ? 'visible'
+                    : 'hidden'
                 }`}
               >
                 <p>Pratinjau</p>
@@ -244,12 +253,12 @@ export function CapturePage() {
           ))}
         </div>
       </div>
-      <div className="float-start p-4" style={{ width: "25%" }}>
+      <div className="float-start p-4" style={{ width: '25%' }}>
         <p>Tambahkan Konteks (File/Teks)</p>
         <input type="file" onChange={handleFileUpload} />
         <div className="m-4"></div>
         <p>Pilih Bahasa</p>
-        <div style={{ height: "50px" }}>
+        <div style={{ height: '50px' }}>
           <SwitchSelector
             onChange={onChange}
             options={options}

@@ -21,13 +21,13 @@ export type ChatbotHistory = {
     data: {
       id: string;
       name: string;
-      type: "human" | "ai";
+      type: 'human' | 'ai';
       content: string;
       example: boolean;
       additional_kwargs: JSON;
       response_metadata: JSON;
     };
-    type: "human" | "ai";
+    type: 'human' | 'ai';
   };
   created_at: string;
 };

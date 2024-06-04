@@ -1,4 +1,4 @@
-import { cn } from "../../utils";
+import { cn } from '../../utils';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ export function Button({ children, loading, ...props }: Readonly<ButtonProps>) {
     <button
       className={cn(
         `me-2 inline-flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`,
-        props.className,
+        props.className
       )}
       {...props}
     >

@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { useGetUserInfoQuery } from "../redux/api/authAPi";
-import { useGetUserRecordingQuery } from "../redux/api/recordingApi";
+import { useNavigate } from 'react-router-dom';
+import { useGetUserInfoQuery } from '../redux/api/authAPi';
+import { useGetUserRecordingQuery } from '../redux/api/recordingApi';
 
 export function RecordingListPage() {
   const navigate = useNavigate();
@@ -9,11 +9,11 @@ export function RecordingListPage() {
 
   // Supaya klo user id null gak ngaco
   const { data: recordingData } = useGetUserRecordingQuery(
-    user?.id ? user.id : "bad_request",
+    user?.id ? user.id : 'bad_request'
   );
 
   const handleBack = () => {
-    navigate("/");
+    navigate('/');
   };
 
   if (user?.id == undefined || recordingData?.length == 0) {

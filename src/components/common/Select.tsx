@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type SelectProps = {
   items: { label: string; deviceId: string }[];
@@ -14,7 +14,7 @@ export function Select(props: SelectProps) {
     >
       {props.items.map((item) => {
         const dataAttr = {
-          [`data-${props.dataset}`]: item.deviceId,
+          [`data-${props.dataset}`]: item.deviceId
         };
         return (
           <option key={item.deviceId} value={item.deviceId} {...dataAttr}>

@@ -1,15 +1,15 @@
-import { RootState, useAppSelector } from "../redux/store";
-import { useDispatch } from "react-redux";
-import { logout } from "../redux/slice";
-import { useNavigate } from "react-router-dom";
-import { useGetUserInfoQuery } from "../redux/api/authAPi";
-import { useEffect, useState } from "react";
-import ToggleTheme from "./common/ToggleTheme";
+import { RootState, useAppSelector } from '../redux/store';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/slice';
+import { useNavigate } from 'react-router-dom';
+import { useGetUserInfoQuery } from '../redux/api/authAPi';
+import { useEffect, useState } from 'react';
+import ToggleTheme from './common/ToggleTheme';
 
 export function Navbar() {
   const user_token = useAppSelector((state: RootState) => state.user).token;
   const { data: user } = useGetUserInfoQuery();
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,19 +19,19 @@ export function Navbar() {
   };
 
   const handleRegister = () => {
-    navigate("/register");
+    navigate('/register');
   };
 
   const handleLogin = () => {
-    navigate("/login");
+    navigate('/login');
   };
 
   const handleYourRecording = () => {
-    navigate("/recordings");
+    navigate('/recordings');
   };
 
   const handleCapture = () => {
-    navigate("/capture");
+    navigate('/capture');
   };
 
   useEffect(() => {

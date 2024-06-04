@@ -1,19 +1,19 @@
-import { baseApi } from "./baseApi";
+import { baseApi } from './baseApi';
 import {
   ChatbotAskingFeedbackRequest,
-  ChatbotResponse,
-} from "../types/chatbot";
+  ChatbotResponse
+} from '../types/chatbot';
 
 // const CHATBOT_API = "http://127.0.0.1:8000";
-const CHATBOT_API = "https://feedback-chatbot-service-73zeqjyhhq-et.a.run.app";
+const CHATBOT_API = 'https://feedback-chatbot-service-73zeqjyhhq-et.a.run.app';
 
 export const chatbotApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getChatbotAnalysis: builder.query<ChatbotResponse, string>({
       query: (feedbackId) => ({
         url: `${CHATBOT_API}/api/video-feedbacks/${feedbackId}`,
-        method: "GET",
-      }),
+        method: 'GET'
+      })
     }),
     askChatbotFeedback: builder.mutation<
       ChatbotResponse,
@@ -21,11 +21,11 @@ export const chatbotApi = baseApi.injectEndpoints({
     >({
       query: ({ body, feedbackId }) => ({
         url: `${CHATBOT_API}/api/video-feedbacks/${feedbackId}`,
-        method: "PATCH",
-        body,
-      }),
-    }),
-  }),
+        method: 'PATCH',
+        body
+      })
+    })
+  })
 });
 
 export const { useGetChatbotAnalysisQuery, useAskChatbotFeedbackMutation } =

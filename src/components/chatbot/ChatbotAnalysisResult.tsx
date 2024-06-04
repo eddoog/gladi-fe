@@ -1,4 +1,4 @@
-import { ChatbotAnalysis } from "../../redux/types/chatbot";
+import { ChatbotAnalysis } from '../../redux/types/chatbot';
 
 type ChatbotAnalysisResultProps = {
   result: ChatbotAnalysis | undefined;

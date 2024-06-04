@@ -1,16 +1,16 @@
-import { baseApi } from "./baseApi";
-import { RecordingResponse, Recording } from "../types/recording";
+import { baseApi } from './baseApi';
+import { RecordingResponse, Recording } from '../types/recording';
 
 const VIDEO_RECORDING_API =
-  "https://video-recording-service-73zeqjyhhq-et.a.run.app";
+  'https://video-recording-service-73zeqjyhhq-et.a.run.app';
 
 export const recordingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getUserRecording: builder.query<RecordingResponse, string>({
       query: (user_id) => ({
         url: VIDEO_RECORDING_API + `/user-file/${user_id}`,
-        method: "GET",
-      }),
+        method: 'GET'
+      })
     }),
     getUserSpecificFiles: builder.query<
       Recording,
@@ -18,10 +18,10 @@ export const recordingApi = baseApi.injectEndpoints({
     >({
       query: ({ user_id, file_name }) => ({
         url: VIDEO_RECORDING_API + `/user-file/${user_id}/${file_name}`,
-        method: "GET",
-      }),
-    }),
-  }),
+        method: 'GET'
+      })
+    })
+  })
 });
 
 export const { useGetUserRecordingQuery, useGetUserSpecificFilesQuery } =

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useRegisterMutation } from "../redux/api/authAPi";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../components/common";
+import React, { useState } from 'react';
+import { useRegisterMutation } from '../redux/api/authAPi';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../components/common';
 
 export function RegisterPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const [register] = useRegisterMutation();
@@ -18,18 +18,18 @@ export function RegisterPage() {
     event.preventDefault();
     const data = {
       username: username,
-      password: password,
+      password: password
     };
     await register({ ...data }).then((res) => {
       if (res) {
-        if ("data" in res) {
-          toast.success("Register success!");
-          navigate("/");
-        } else if ("data" in res.error) {
+        if ('data' in res) {
+          toast.success('Register success!');
+          navigate('/');
+        } else if ('data' in res.error) {
           const errorData = res.error.data as { message: string };
           toast.error(errorData.message);
         } else {
-          toast.error("Unknown error!");
+          toast.error('Unknown error!');
         }
       }
     });

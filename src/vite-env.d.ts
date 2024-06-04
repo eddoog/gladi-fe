@@ -1,2 +1,2 @@
 /// <reference types="vite/client" />
-declare module "react-switch-selector";
+declare module 'react-switch-selector';
