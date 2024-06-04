@@ -1,12 +1,25 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { useGetTaskResultQuery } from "../redux/api/processingApi";
 
 export function ProgressPage() {
   const { task_id } = useParams();
   const { user_id } = useParams();
   const { file_name } = useParams();
+  const success = "SUCCESS"
 
-  const { data } = useGetTaskResultQuery(task_id ? task_id : "undefined")
+  const { data, refetch } = useGetTaskResultQuery(task_id ? task_id : "undefined")
+
+  useEffect(() => {
+    if (data?.task_status != success){
+      const interval = setInterval(() => {
+        refetch();
+      }, 1500); // Adjust the interval time as needed (e.g., 5000ms for 5 seconds)
+  
+      return () => clearInterval(interval); // Clear the interval on component unmount
+    }
+
+  }, [data, refetch]);
   
   if (data?.task_result == null){
     
