@@ -1,5 +1,5 @@
 import 'react-notifications-component/dist/theme.css'
-
+import { RootState, useAppSelector } from "../redux/store";
 import React from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import { useGetUserInfoQuery } from "../redux/api/authAPi";
 
 export function CapturePage() {
   const navigate = useNavigate();
+  const user_token = useAppSelector((state: RootState) => state.user).token;
 
   const {
     activeRecordings,
@@ -88,7 +89,7 @@ export function CapturePage() {
     // Upload the blob to a back-end
     const formData = new FormData();
 
-    if (recordedChunks != undefined && selectedFile != null && user) {
+    if (recordedChunks != undefined && selectedFile != null && user && user_token != null) {
       formData.append('video', recordedChunks);
       formData.append('file', selectedFile);
       formData.append("name", uuid());
@@ -98,6 +99,9 @@ export function CapturePage() {
       fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload-file', {
         method: 'POST',
         body: formData,
+        headers: {
+          Authorization: `Bearer ${user_token}`
+        }
       }).then(async response => {
         const data = await response.json();
         notification("Upload Success!", "success", `Your request is being processing with ID: ${data.task_id}`);
