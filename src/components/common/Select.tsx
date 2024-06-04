@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type SelectProps = {
   items: { label: string; deviceId: string }[];
@@ -9,7 +9,7 @@ type SelectProps = {
 export function Select(props: SelectProps) {
   return (
     <select
-      className="input p2 text-black px-2 rounded-lg ml-2"
+      className="input p2 ml-2 rounded-lg px-2 text-black"
       onChange={props.onChange}
     >
       {props.items.map((item) => {

@@ -38,4 +38,4 @@ export type ChatbotAskingFeedbackRequest = {
 
 export type ChatbotFeedbackResponse = {
   answer: string;
-}
+};

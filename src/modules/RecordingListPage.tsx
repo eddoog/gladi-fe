@@ -7,80 +7,85 @@ export function RecordingListPage() {
 
   const { data: user } = useGetUserInfoQuery();
 
-  // Supaya klo user id null gak ngaco 
-  const {data: recordingData} = useGetUserRecordingQuery(user?.id ? user.id : "bad_request")
-  
+  // Supaya klo user id null gak ngaco
+  const { data: recordingData } = useGetUserRecordingQuery(
+    user?.id ? user.id : "bad_request",
+  );
+
   const handleBack = () => {
     navigate("/");
   };
 
-  if (user?.id == undefined || recordingData?.length == 0){
-      return (
-        <div>
-          <div className="flex flex-wrap gap-3 w-full py-10">
-            <h2 className="text-3xl md:text-5xl text-center w-full font-bold">
-              Your Recordings
-            </h2>
-            <div className="flex flex-wrap gap-3 w-full py-5">
-              <button className="rounded-lg flex flex-row items-center gap-2 justify-center bg-blue-500 text-white hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600 px-4 py-2 w-1/5 duration-200 transition-all ease-in-out">
-                <a href="/capture" className="text-white">
-                  Create Recording
-                </a>
-              </button>
-            </div>
-  
-            <div className="flex flex-wrap gap-3 w-full py-5 px-4">
-              <div className="w-full">
-                <h2 className="text-center font-bold">You haven't had any recording yet.</h2>
-              </div>
-            </div>
-            <button
-              onClick={handleBack}
-              className="rounded-lg flex flex-row items-center gap-2 justify-center bg-blue-500 text-white hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600 duration-200 transition-all ease-in-out px-4 py-2"
-            >
-              Back
+  if (user?.id == undefined || recordingData?.length == 0) {
+    return (
+      <div>
+        <div className="flex w-full flex-wrap gap-3 py-10">
+          <h2 className="w-full text-center text-3xl font-bold md:text-5xl">
+            Your Recordings
+          </h2>
+          <div className="flex w-full flex-wrap gap-3 py-5">
+            <button className="flex w-1/5 flex-row items-center justify-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 ease-in-out hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600">
+              <a href="/capture" className="text-white">
+                Create Recording
+              </a>
             </button>
           </div>
-        </div>
-      );
-    }
-    else {
-      return (
-    <div>
-      <div className="flex flex-wrap gap-3 w-full py-10">
-        <h2 className="text-3xl md:text-5xl text-center w-full font-bold">
-          Your Recordings
-        </h2>
-        <div className="flex flex-wrap gap-3 w-full py-5">
-          <button className="rounded-lg flex flex-row items-center gap-2 justify-center bg-blue-500 text-white hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600 px-4 py-2 w-1/5 duration-200 transition-all ease-in-out">
-            <a href="/capture" className="text-white">
-              Create Recording
-            </a>
+
+          <div className="flex w-full flex-wrap gap-3 px-4 py-5">
+            <div className="w-full">
+              <h2 className="text-center font-bold">
+                You haven't had any recording yet.
+              </h2>
+            </div>
+          </div>
+          <button
+            onClick={handleBack}
+            className="flex flex-row items-center justify-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 ease-in-out hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600"
+          >
+            Back
           </button>
         </div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <div className="flex w-full flex-wrap gap-3 py-10">
+          <h2 className="w-full text-center text-3xl font-bold md:text-5xl">
+            Your Recordings
+          </h2>
+          <div className="flex w-full flex-wrap gap-3 py-5">
+            <button className="flex w-1/5 flex-row items-center justify-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 ease-in-out hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600">
+              <a href="/capture" className="text-white">
+                Create Recording
+              </a>
+            </button>
+          </div>
 
-        <div className="flex flex-wrap gap-3 w-full py-5 px-4">
-          <div className="w-full">
-            {
-              recordingData?.map((recording) => (
-                <a href={`/progress/${recording.task_id}/${recording.user_id}/${recording.file_name}`} className="block dark:text-indigo-300" key={recording.id}>
-                  <div className="w-full flex flex-col  justify-center bg-gray-200 dark:bg-gray-600 border-2 border-gray-400 dark:border-gray-500 p-4 rounded-lg shadow-md mb-4">
+          <div className="flex w-full flex-wrap gap-3 px-4 py-5">
+            <div className="w-full">
+              {recordingData?.map((recording) => (
+                <a
+                  href={`/progress/${recording.task_id}/${recording.user_id}/${recording.file_name}`}
+                  className="block dark:text-indigo-300"
+                  key={recording.id}
+                >
+                  <div className="mb-4 flex w-full flex-col justify-center rounded-lg border-2 border-gray-400 bg-gray-200 p-4 shadow-md dark:border-gray-500 dark:bg-gray-600">
                     <p>File name: {recording.file_name}</p>
                     <p>Task id: {recording.task_id}</p>
                   </div>
                 </a>
-              ))
-            }
+              ))}
+            </div>
           </div>
+          <button
+            onClick={handleBack}
+            className="flex flex-row items-center justify-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 ease-in-out hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600"
+          >
+            Back
+          </button>
         </div>
-        <button
-          onClick={handleBack}
-          className="rounded-lg flex flex-row items-center gap-2 justify-center bg-blue-500 text-white hover:bg-blue-600 dark:bg-gray-500 hover:dark:bg-gray-600 duration-200 transition-all ease-in-out px-4 py-2"
-        >
-          Back
-        </button>
       </div>
-    </div>
-  )
-    }
-} 
+    );
+  }
+}

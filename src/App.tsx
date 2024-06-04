@@ -9,7 +9,7 @@ import {
   CapturePage,
   TesPage,
   ResultPage,
-  ProgressPage
+  ProgressPage,
 } from "./modules";
 import { Navbar } from "./components";
 
@@ -64,7 +64,7 @@ function App() {
 
 function NavbarWrapper() {
   return (
-    <div className="min-h-screen flex flex-col gap-2 w-full items-center relative">
+    <div className="relative flex min-h-screen w-full flex-col items-center gap-2">
       <Navbar />
       <Outlet />
     </div>

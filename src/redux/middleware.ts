@@ -13,15 +13,15 @@ export const rtkQueryErrorLogger: Middleware =
         action?.payload.status == 401 &&
         action.meta.arg.endpointName != "login"
       ) {
-        api.dispatch(logout())
+        api.dispatch(logout());
       } else {
         const errorData =
           action.payload.data?.error?.message ||
           action.payload.data?.message ||
           action.error.message;
-        if (errorData.includes("JWT expired")){
-          api.dispatch(logout())
-          toast.error("Session expired! Please log in again.")
+        if (errorData.includes("JWT expired")) {
+          api.dispatch(logout());
+          toast.error("Session expired! Please log in again.");
         }
       }
     }

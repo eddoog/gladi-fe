@@ -67,7 +67,7 @@
 }
 
 body {
-  @apply dark:bg-[#242424] bg-white dark:text-[rgba(255,255,255,0.87)] text-[#213547];
+  @apply bg-white text-[#213547] dark:bg-[#242424] dark:text-[rgba(255,255,255,0.87)];
 }
 
 a {

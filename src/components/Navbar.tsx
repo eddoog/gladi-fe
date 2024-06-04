@@ -44,7 +44,7 @@ export function Navbar() {
     return (
       <div className="flex w-full justify-between gap-4 px-4 py-2 md:px-8">
         <div className="text-xl font-bold">Welcome to Gladi!</div>
-        <div className="flex flex-row gap-6 items-center">
+        <div className="flex flex-row items-center gap-6">
           <ToggleTheme />
           <button
             onClick={handleRegister}
@@ -65,7 +65,7 @@ export function Navbar() {
     return (
       <div className="flex w-full justify-between gap-4 px-4 py-2 md:px-8">
         <div className="text-xl font-bold">Welcome Back, {username}!</div>
-        <div className="flex flex-row gap-6 items-center">
+        <div className="flex flex-row items-center gap-6">
           <ToggleTheme />
           <button
             onClick={handleCapture}

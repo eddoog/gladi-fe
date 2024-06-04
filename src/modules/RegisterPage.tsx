@@ -45,9 +45,9 @@ export function RegisterPage() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="dark:bg-[#343434] bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold mb-4">Register</h2>
+    <div className="flex h-screen items-center justify-center">
+      <div className="rounded-lg bg-white p-8 shadow-md dark:bg-[#343434]">
+        <h2 className="mb-4 text-3xl font-bold">Register</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
@@ -60,7 +60,7 @@ export function RegisterPage() {
               type="text"
               id="username"
               name="username"
-              className="mt-1 p-2 border rounded-md w-full"
+              className="mt-1 w-full rounded-md border p-2"
               placeholder="Enter your username"
               value={username}
               onChange={handleUsernameChange}
@@ -78,7 +78,7 @@ export function RegisterPage() {
               type="password"
               id="password"
               name="password"
-              className="mt-1 p-2 border rounded-md w-full"
+              className="mt-1 w-full rounded-md border p-2"
               placeholder="Enter your password"
               value={password}
               onChange={handlePasswordChange}

@@ -9,16 +9,16 @@ export function Button({ children, loading, ...props }: Readonly<ButtonProps>) {
   return (
     <button
       className={cn(
-        `text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 justify-center focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center w-full`,
-        props.className
+        `me-2 inline-flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`,
+        props.className,
       )}
       {...props}
     >
       {loading ? (
-        <div className="flex flex-row justify-center items-center w-full">
+        <div className="flex w-full flex-row items-center justify-center">
           <svg
             aria-hidden="true"
-            className="inline h-4 me-3 text-white animate-spin"
+            className="me-3 inline h-4 animate-spin text-white"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

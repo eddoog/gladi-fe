@@ -28,4 +28,5 @@ export const chatbotApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetChatbotAnalysisQuery, useAskChatbotFeedbackMutation } = chatbotApi;
+export const { useGetChatbotAnalysisQuery, useAskChatbotFeedbackMutation } =
+  chatbotApi;
