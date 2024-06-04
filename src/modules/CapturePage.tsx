@@ -95,15 +95,15 @@ export function CapturePage() {
       formData.append("user_id", user.id);
       formData.append("lang", languange);
 
-      // fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload-file', {
-      //   method: 'POST',
-      //   body: formData,
-      // }).then(async response => {
-      //   const data = await response.json();
-      //   notification("Upload Success!", "success", `Your request is being processing with ID: ${data.task_id}`);
-      // }).catch(_ => {
-      //   notification("Upload Failed!", "danger", null);
-      // });
+      fetch('https://video-recording-service-73zeqjyhhq-et.a.run.app/upload-file', {
+        method: 'POST',
+        body: formData,
+      }).then(async response => {
+        const data = await response.json();
+        notification("Upload Success!", "success", `Your request is being processing with ID: ${data.task_id}`);
+      }).catch(_ => {
+        notification("Upload Failed!", "danger", null);
+      });
     } else {
       notification("Incomplete Data!", "danger", null);
     }
